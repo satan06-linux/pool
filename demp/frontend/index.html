@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec Platform - Advanced Security Suite</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/startup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Startup Loading Screen -->
+    <div class="startup-screen" id="startupScreen">
+        <div class="startup-content">
+            <div class="startup-logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>CyberSec Platform</h1>
+                <p>Initializing Security Suite...</p>
+            </div>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <span class="terminal-title">Security Engine Initialization</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line" id="terminalOutput">
+                        <span class="prompt">cybersec@platform:~$</span>
+                        <span class="cursor">|</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="startup-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Loading security modules...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen" style="display: none;">
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <div class="theme-toggle-welcome">
+                    <button class="theme-btn" onclick="toggleTheme()">
+                        <i class="fas fa-sun" id="themeIconWelcome"></i>
+                    </button>
+                </div>
+                <div class="welcome-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>Welcome to CyberSec Platform</h1>
+                    <p>Your comprehensive cybersecurity solution</p>
+                </div>
+            </div>
+            
+            <div class="welcome-options">
+                <div class="auth-card">
+                    <h2>Get Started</h2>
+                    <p>Choose an option to continue</p>
+                    
+                    <div class="welcome-buttons">
+                        <button class="btn btn-primary btn-large" onclick="goToLogin()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                        <button class="btn btn-outline btn-large" onclick="goToRegister()">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                        <button class="btn btn-ghost" onclick="goToMain()">
+                            <i class="fas fa-eye"></i>
+                            Continue as Guest
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/startup.js"></script>
+</body>
+</html>

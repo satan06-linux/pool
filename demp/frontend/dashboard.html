@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CyberSec Platform</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberSec Platform</span>
+            </div>
+            <div class="nav-menu">
+                <a href="main.html" class="nav-link">Home</a>
+                <a href="main.html#tools" class="nav-link">Tools</a>
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <div class="theme-toggle">
+                    <button class="theme-btn" onclick="toggleTheme()">
+                        <i class="fas fa-sun" id="themeIcon"></i>
+                    </button>
+                </div>
+                <div class="user-menu">
+                    <span class="user-name" id="userName">User</span>
+                    <div class="user-dropdown">
+                        <button class="user-btn" onclick="toggleUserMenu()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="main.html"><i class="fas fa-home"></i> Home</a>
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-cog"></i> Admin</a>
+                            <hr>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Security Dashboard</h1>
+            <p>Monitor your security scans and account activity</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="totalScans">0</h3>
+                    <p>Total Scans</p>
+                    <span class="stat-change positive">This month</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="todayScans">0</h3>
+                    <p>Today's Scans</p>
+                    <span class="stat-change" id="remainingScans">5 remaining</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="highRisk">0</h3>
+                    <p>High Risk Findings</p>
+                    <span class="stat-change negative">Needs attention</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="avgRisk">0</h3>
+                    <p>Avg Risk Score</p>
+                    <span class="stat-change positive">Lower is better</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <a href="main.html#tools" class="action-card">
+                    <i class="fas fa-fishing-hook"></i>
+                    <h3>Phishing Scan</h3>
+                    <p>Check URLs for phishing threats</p>
+                </a>
+                <a href="main.html#tools" class="action-card">
+                    <i class="fas fa-key"></i>
+                    <h3>Password Check</h3>
+                    <p>Analyze password strength</p>
+                </a>
+                <a href="main.html#tools" class="action-card pro-action">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Full Security Scan</h3>
+                    <p>Comprehensive vulnerability assessment</p>
+                    <span class="badge pro">PRO</span>
+                </a>
+                <a href="main.html#tools" class="action-card pro-action">
+                    <i class="fas fa-certificate"></i>
+                    <h3>SSL Audit</h3>
+                    <p>SSL/TLS certificate analysis</p>
+                    <span class="badge pro">PRO</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Scans -->
+        <div class="recent-scans">
+            <div class="section-header">
+                <h2>Recent Scans</h2>
+                <button class="btn btn-outline" onclick="refreshScans()">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+            <div class="scans-list" id="scansList">
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <h3>No scans yet</h3>
+                    <p>Start by running your first security scan</p>
+                    <a href="main.html#tools" class="btn btn-primary">Start Scanning</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Status -->
+        <div class="account-status">
+            <h2>Account Status</h2>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Current Plan</h3>
+                        <span class="tier-badge" id="currentTier">Free</span>
+                    </div>
+                    <div class="status-content">
+                        <p id="planDescription">Basic security tools with limited scans</p>
+                        <div class="usage-bar">
+                            <div class="usage-fill" id="usageFill" style="width: 0%"></div>
+                        </div>
+                        <p class="usage-text" id="usageText">0 of 5 scans used today</p>
+                    </div>
+                    <div class="status-actions">
+                        <button class="btn btn-primary" id="upgradeBtn" onclick="upgradePlan()">
+                            <i class="fas fa-crown"></i> Upgrade to Pro
+                        </button>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Security Score</h3>
+                        <span class="security-score" id="securityScore">85</span>
+                    </div>
+                    <div class="status-content">
+                        <p>Based on your recent scan results</p>
+                        <div class="score-breakdown">
+                            <div class="score-item">
+                                <span>SSL Security</span>
+                                <span class="score-value good">Good</span>
+                            </div>
+                            <div class="score-item">
+                                <span>Phishing Risk</span>
+                                <span class="score-value low">Low</span>
+                            </div>
+                            <div class="score-item">
+                                <span>Overall Health</span>
+                                <span class="score-value good">Good</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Loading dashboard...</p>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

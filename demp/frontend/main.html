@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec Platform - Security Tools</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>CyberSec Platform</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#tools" class="nav-link">Tools</a>
+                <a href="dashboard.html" class="nav-link" id="dashboardLink" style="display: none;">Dashboard</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <div class="theme-toggle">
+                    <button class="theme-btn" onclick="toggleTheme()">
+                        <i class="fas fa-sun" id="themeIcon"></i>
+                    </button>
+                </div>
+                <div class="auth-buttons" id="authButtons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="register.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span class="user-name" id="userName"></span>
+                    <div class="user-dropdown">
+                        <button class="user-btn" onclick="toggleUserMenu()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                            <a href="admin.html" id="adminLink" style="display: none;"><i class="fas fa-cog"></i> Admin</a>
+                            <hr>
+                            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Advanced Cybersecurity Platform</h1>
+            <p>Comprehensive security scanning, threat detection, and vulnerability assessment tools</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large" onclick="scrollToSection('tools')">
+                    <i class="fas fa-rocket"></i> Start Scanning
+                </button>
+                <button class="btn btn-outline btn-large" onclick="scrollToSection('pricing')">
+                    <i class="fas fa-crown"></i> Go Pro
+                </button>
+            </div>
+            
+            <!-- Quick Auth Section -->
+            <div class="quick-auth" id="quickAuth">
+                <div class="auth-prompt">
+                    <h3>🔐 Unlock Full Security Suite</h3>
+                    <p>Get access to advanced scanning tools and real-time threat monitoring</p>
+                    <div class="quick-auth-buttons">
+                        <a href="login.html" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                        <a href="register.html" class="btn btn-outline">
+                            <i class="fas fa-user-plus"></i> Sign Up Free
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome Message for New Users -->
+            <div class="welcome-message" id="welcomeMessage" style="display: none;">
+                <div class="welcome-prompt">
+                    <button class="close-welcome" onclick="closeWelcomeMessage()" title="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h3>🎉 Welcome to CyberSec Platform!</h3>
+                    <p>Your account has been created successfully. Start exploring our security tools below.</p>
+                    <div class="welcome-actions">
+                        <button class="btn btn-primary" onclick="scrollToSection('tools')">
+                            <i class="fas fa-rocket"></i> Start Scanning
+                        </button>
+                        <a href="dashboard.html" class="btn btn-outline">
+                            <i class="fas fa-tachometer-alt"></i> View Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="security-grid">
+                <div class="grid-item"><i class="fas fa-shield-virus"></i></div>
+                <div class="grid-item"><i class="fas fa-lock"></i></div>
+                <div class="grid-item"><i class="fas fa-eye"></i></div>
+                <div class="grid-item"><i class="fas fa-bug"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <h2>Security Tools</h2>
+            <div class="tools-grid">
+                <!-- Free Tools -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-fishing-hook"></i>
+                        <h3>Phishing Scanner</h3>
+                        <span class="badge free">FREE</span>
+                    </div>
+                    <p>Detect phishing websites and malicious URLs</p>
+                    <div class="tool-form">
+                        <input type="url" id="phishingUrl" placeholder="https://example.com" class="form-input">
+                        <button class="btn btn-primary" onclick="scanPhishing()">
+                            <i class="fas fa-search"></i> Scan
+                        </button>
+                    </div>
+                    <div class="result-container" id="phishingResult"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-key"></i>
+                        <h3>Password Strength</h3>
+                        <span class="badge free">FREE</span>
+                    </div>
+                    <p>Analyze password security and get recommendations</p>
+                    <div class="tool-form">
+                        <input type="password" id="passwordInput" placeholder="Enter password" class="form-input">
+                        <button class="btn btn-primary" onclick="checkPassword()">
+                            <i class="fas fa-check"></i> Check
+                        </button>
+                    </div>
+                    <div class="result-container" id="passwordResult"></div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-hashtag"></i>
+                        <h3>Hash Generator</h3>
+                        <span class="badge free">FREE</span>
+                    </div>
+                    <p>Generate secure hashes for text and files</p>
+                    <div class="tool-form">
+                        <input type="text" id="hashText" placeholder="Text to hash" class="form-input">
+                        <select id="hashAlgorithm" class="form-select">
+                            <option value="sha256">SHA-256</option>
+                            <option value="md5">MD5</option>
+                            <option value="sha1">SHA-1</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="generateHash()">
+                            <i class="fas fa-cog"></i> Generate
+                        </button>
+                    </div>
+                    <div class="result-container" id="hashResult"></div>
+                </div>
+
+                <!-- Pro Tools -->
+                <div class="tool-card pro-tool">
+                    <div class="tool-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Full Security Scan</h3>
+                        <span class="badge pro">PRO</span>
+                    </div>
+                    <p>Comprehensive vulnerability assessment and security audit</p>
+                    <div class="tool-form">
+                        <input type="url" id="fullScanUrl" placeholder="https://target-website.com" class="form-input">
+                        <button class="btn btn-primary" onclick="fullSecurityScan()">
+                            <i class="fas fa-search-plus"></i> Deep Scan
+                        </button>
+                    </div>
+                    <div class="result-container" id="fullScanResult"></div>
+                </div>
+
+                <div class="tool-card pro-tool">
+                    <div class="tool-header">
+                        <i class="fas fa-certificate"></i>
+                        <h3>SSL Audit</h3>
+                        <span class="badge pro">PRO</span>
+                    </div>
+                    <p>Advanced SSL/TLS certificate and configuration analysis</p>
+                    <div class="tool-form">
+                        <input type="url" id="sslUrl" placeholder="https://example.com" class="form-input">
+                        <button class="btn btn-primary" onclick="sslAudit()">
+                            <i class="fas fa-certificate"></i> Audit
+                        </button>
+                    </div>
+                    <div class="result-container" id="sslResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <h2>Choose Your Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">₹0<span>/month</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Basic phishing detection</li>
+                        <li><i class="fas fa-check"></i> Password strength checker</li>
+                        <li><i class="fas fa-check"></i> Hash generator</li>
+                        <li><i class="fas fa-times"></i> Limited scans per day</li>
+                    </ul>
+                    <button class="btn btn-outline">Current Plan</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Pro</h3>
+                    <div class="price">₹999<span>/month</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> Full security scans</li>
+                        <li><i class="fas fa-check"></i> SSL/TLS auditing</li>
+                        <li><i class="fas fa-check"></i> Unlimited scans</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="upgradeToPro()">Upgrade Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
